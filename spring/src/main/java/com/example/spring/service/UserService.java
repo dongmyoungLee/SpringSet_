@@ -46,6 +46,20 @@ public class UserService {
         }
     }
 
+
+    public Result getUserByNickname(String nickname) {
+        try {
+            Optional<User> optionalUser = userRepository.findUserByNickname(nickname);
+            if (optionalUser.isEmpty()) {
+                return new Result(ResultCode.NOT_EXISTS_USER);
+            }
+            User user = optionalUser.get();
+            return new Result(ResultCode.SUCCESS, user);
+        } catch (Exception e) {
+            return new Result(ResultCode.DB_ERROR);
+        }
+    }
+
     public Result insertUser(User user) {
         //reg dttm setting
         //exp dttm setting
@@ -54,7 +68,7 @@ public class UserService {
     }
 
     public Result saveUser(User user) {
-        User savedUser = userRepository.save(user);
+        User savedUser = userRepository.save(user);     //insert + update => merge
         if (savedUser == null) {
             return new Result(ResultCode.FAIL_TO_SAVE_USER);
         }

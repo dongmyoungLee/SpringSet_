@@ -15,11 +15,11 @@ public class Board {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO) //auto increase
     private Long id;
 
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)     //1대 n
+    @JoinColumn(name = "user_id")                   //어떤 컬럼으로 조인 할지
     private User user;
 
     @Column(name = "title", nullable = false, length = 100)

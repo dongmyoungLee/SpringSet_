@@ -29,12 +29,19 @@ public class UserController {
         return userService.getUser(id);
     }
 
+    @GetMapping("/users-by-nickname/{nickname}")
+    public Result getUsersByNickname(@PathVariable String nickname) {
+        return userService.getUserByNickname(nickname);
+    }
+
+    //회원가입
     @PostMapping("/users")
     public Result insertUser(@RequestBody User user) {
         return userService.insertUser(user);
     }
 
 
+    //탈퇴
     @DeleteMapping("/users")
     public Result expireUser(@RequestBody User user) {
         return userService.expireUser(user);
